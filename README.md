@@ -9,7 +9,9 @@ This is demo flow that demonstrates enterprise networking design capabilities. K
 * Inter-region communication to leverage Microsoft network (not forcing traffic via on-premises)
 * Gateway to on-premises in all used regions, shortest path to cloud
 
+# Table of Contents
 - [Enterprise network in Azure](#enterprise-network-in-azure)
+- [Table of Contents](#table-of-contents)
 - [Connected networks in Azure](#connected-networks-in-azure)
     - [Store target regions in environment variable](#store-target-regions-in-environment-variable)
     - [Create Resource Group](#create-resource-group)
