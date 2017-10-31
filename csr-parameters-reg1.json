@@ -1,0 +1,78 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "value": "csr"
+        },
+        "adminUsername": {
+            "value": "tomas"
+        },
+        "adminPassword": {
+            "value": "Azure12345678"
+        },
+        "authenticationType": {
+            "value": "password"
+        },
+        "vmSize": {
+            "value": "Standard_DS2_v2"
+        },
+        "location": {
+            "value": "westeurope"
+        },
+        "newStorageAccountName": {
+            "value": "mycsrstoragereg1"
+        },
+        "storageAccountType": {
+            "value": "Standard_LRS"
+        },
+        "storageAccountNewOrExisting": {
+            "value": "new"
+        },
+        "storageAccountExistingRG": {
+            "value": "peering-reg1-csr"
+        },
+        "publicIPAddressName": {
+            "value": "mycsripreg1"
+        },
+        "publicIPDnsName": {
+            "value": "mycsrreg1"
+        },
+        "publicIPNewOrExisting": {
+            "value": "new"
+        },
+        "publicIPExistingRGName": {
+            "value": "peering-reg1-csr"
+        },
+        "virtualNetworkName": {
+            "value": "netreg1hub"
+        },
+        "virtualNetworkAddressPrefix": {
+            "value": "10.100.0.0/16"
+        },
+        "Subnet1Name": {
+            "value": "csrext"
+        },
+        "Subnet1Prefix": {
+            "value": "10.100.10.0/24"
+        },
+        "Subnet2Name": {
+            "value": "csrint"
+        },
+        "Subnet2Prefix": {
+            "value": "10.100.11.0/24"
+        },
+        "vnetNewOrExisting": {
+            "value": "existing"
+        },
+        "virtualNetworkExistingRGName": {
+            "value": "peering"
+        },
+        "subnet1StartAddress": {
+            "value": "10.100.10.4"
+        },
+        "subnet2StartAddress": {
+            "value": "10.100.11.4"
+        }
+    }
+}

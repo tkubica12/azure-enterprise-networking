@@ -1,0 +1,76 @@
+configure terminal
+
+crypto ikev2 proposal azure-proposal
+  encryption aes-cbc-256 aes-cbc-128 3des
+  integrity sha1
+  group 2
+  exit
+
+crypto ikev2 policy azure-policy
+  proposal azure-proposal
+  exit
+
+crypto ikev2 keyring azure-keyring
+  peer reg1
+    address {remoteip1}
+    pre-shared-key Azure12345678
+    exit
+  peer reg2
+    address {remoteip2}
+    pre-shared-key Azure12345678
+    exit
+  exit
+
+crypto ikev2 profile azure-profile-reg1
+  match address local interface GigabitEthernet1
+  match identity remote address {remoteip1} 255.255.255.255
+  authentication remote pre-share
+  authentication local pre-share
+  keyring local azure-keyring
+  exit
+
+crypto ikev2 profile azure-profile-reg2
+  match address local interface GigabitEthernet1
+  match identity remote address {remoteip2} 255.255.255.255
+  authentication remote pre-share
+  authentication local pre-share
+  keyring local azure-keyring
+  exit
+
+
+crypto ipsec transform-set azure-ipsec-proposal-set esp-aes 256 esp-sha-hmac
+ mode tunnel
+ exit
+
+crypto ipsec profile azure-vti-reg1
+  set transform-set azure-ipsec-proposal-set
+  set ikev2-profile azure-profile-reg1
+  exit
+
+crypto ipsec profile azure-vti-reg2
+  set transform-set azure-ipsec-proposal-set
+  set ikev2-profile azure-profile-reg2
+  exit
+
+interface Loopback99
+ ip address {localip} 255.255.255.255
+ exit
+
+int tunnel 1
+  ip unnumbered Loopback99
+  ip tcp adjust-mss 1350
+  tunnel source GigabitEthernet1
+  tunnel mode ipsec ipv4
+  tunnel destination {remoteip1}
+  tunnel protection ipsec profile azure-vti-reg1
+  exit
+
+int tunnel 2
+  ip unnumbered Loopback99
+  ip tcp adjust-mss 1350
+  tunnel source GigabitEthernet1
+  tunnel mode ipsec ipv4
+  tunnel destination {remoteip2}
+  tunnel protection ipsec profile azure-vti-reg2
+  exit
+

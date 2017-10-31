@@ -1,0 +1,28 @@
+configure terminal
+
+
+interface loopback 1
+  ip address 10.254.254.1 255.255.255.255
+  exit
+
+ip ssh source-interface loopback 1
+
+ip route {reg1peeringip} 255.255.255.255 tunnel 1
+ip route {reg2peeringip} 255.255.255.255 tunnel 2
+
+router bgp 65002
+  bgp router-id 10.254.254.1
+  neighbor {reg1peeringip} remote-as 65001
+  neighbor {reg1peeringip} ebgp-multihop 255
+  neighbor {reg1peeringip} update-source loopback 1
+  neighbor {reg2peeringip} remote-as 65001
+  neighbor {reg2peeringip} ebgp-multihop 255
+  neighbor {reg2peeringip} update-source loopback 1
+  address-family ipv4 unicast
+    neighbor {reg1peeringip} activate
+    neighbor {reg2peeringip} activate
+    default-information originate
+    redistribute static
+    network 10.254.254.1 255.255.255.255
+    exit
+
