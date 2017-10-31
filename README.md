@@ -64,7 +64,7 @@ This is demo flow that demonstrates enterprise networking design capabilities. K
 # Connected networks in Azure
 Let's start with schema.
 
-![alt text](https://raw.githubusercontent.com/tkubica12/azure-enterprise-networking/master/images/Drawing1.png "Schema 1")
+![alt text](https://raw.githubusercontent.com/tkubica12/azure-enterprise-networking/master/images/Drawing1.jpg "Schema 1")
 
 ## Store target regions in environment variable
 For our demo we gonna need two regions. We will use global VNET peering feature which is currently in Preview and limited to certain regions. For now we will select following two regions.
@@ -344,7 +344,7 @@ ssh tomas@$ciscoIP 'ping 10.102.1.4 source 10.254.254.1'
 # Deploying virtual network device into service VNET to filter and route traffic between BUs
 First let's visualize what we want to achive.
 
-![alt text](https://raw.githubusercontent.com/tkubica12/azure-enterprise-networking/master/images/Drawing2.png "Schema 2")
+![alt text](https://raw.githubusercontent.com/tkubica12/azure-enterprise-networking/master/images/Drawing2.jpg "Schema 2")
 
 In this section we will deploy virtual network applicance in service VNET (hub) so we have better control from network security perspective. In our example this appliance will only be Cisco CSR 1000v router (for demonstration purposes), but you can easily have complex NGFW device deployed instead to implement deeper functionality such as IPS, antitvirus, DLP, web gateway etc. 
 
@@ -524,7 +524,7 @@ tracepath 10.201.1.4
 # Enable Internet access for BUs via network appliance in hub VNET
 Again we are going to start with schema.
 
-![alt text](https://raw.githubusercontent.com/tkubica12/azure-enterprise-networking/master/images/Drawing3.png "Schema 3")
+![alt text](https://raw.githubusercontent.com/tkubica12/azure-enterprise-networking/master/images/Drawing3.jpg "Schema 3")
 
 In our current setup all Internet traffic goes back to on-premises environment. That might be desired situation for security and compliance reasons. Our demo environment on-prem simulated CSR is not configured for providing Internet access, but let's show that traffic is indeed routed there. Use tracepath from BU VM to some public IP address in Internet.
 
