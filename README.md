@@ -1,11 +1,11 @@
 # Enterprise network in Azure
 This is demo flow that demonstrates enterprise networking design capabilities. Key principles are:
 
-* 3 levels network filtering hierarchy (eg. BU -> environment -> app) with top level being VNETs filtered via network virtual appliances, second level subnetes inside VNET filteret with NSG and microsegmentation on VM level filtered with NSG/ASG
+* 3 levels network filtering hierarchy (eg. BU -> environment -> app) with top level being VNETs filtered via network virtual appliances, second level subnets inside VNET filtered with NSG and microsegmentation on VM level filtered with NSG/ASG
 * one shared gateway per region to on-premises network (eg. service VNET managed by networking/security team), shared infrastructure environment (DNS, AD, ...)
 * BU VNETs forced to use service VNET as gateway
 * Cross BU and cross site communication forced via virtual appliance
-* All Internet access to go via on-premises (security requirement)
+* All Internet access to go via on-premises (security requirement) or optionally via virtual network security devices
 * Inter-region communication to leverage Microsoft network (not forcing traffic via on-premises)
 * Gateway to on-premises in all used regions, shortest path to cloud
 
@@ -57,7 +57,7 @@ This is demo flow that demonstrates enterprise networking design capabilities. K
     - [Configure route for csrext subnet to access Internet via Azure](#configure-route-for-csrext-subnet-to-access-internet-via-azure)
     - [Configure CSR to enable Internet access](#configure-csr-to-enable-internet-access)
     - [Test access to Internet](#test-access-to-internet)
-- [Configure intra-region peering](#configure-intra-region-peering)
+- [Configure inter-region peering (Global VNET peering)](#configure-inter-region-peering-global-vnet-peering)
 - [Add NSG on subnet level and NSG/ASG microsegmentation on NIC level](#add-nsg-on-subnet-level-and-nsgasg-microsegmentation-on-nic-level)
 
 
@@ -629,7 +629,7 @@ PING 208.67.222.222 (208.67.222.222) 56(84) bytes of data.
 ...
 ```
 
-# Configure intra-region peering
+# Configure inter-region peering (Global VNET peering)
 TODO
 
 # Add NSG on subnet level and NSG/ASG microsegmentation on NIC level
